@@ -152,13 +152,19 @@ public class OldUserGroupCommand extends BaseCommand implements CommandExecutor 
                         sendMessage(sender, "Please consult the command documentation!");
                     }
                 }
-            } else if (args.length == 3 && args[0].equalsIgnoreCase("meta")) {
+            } else if (args.length >= 3 && args[0].equalsIgnoreCase("meta")) {
                 if (calc == null) {
                     sendMessage(sender, "Nothing is selected!");
                 } else if (calc.getType() != type) {
                     sendMessage(sender, "Please select a " + type.getName() + ", you currently have a " + opposite.getName() + " selected.");
                 } else {
-                    cmd.setValue(args[1], args[2], sender);
+                    String meta = "";
+                    for(int i = 2; i < args.length; i++){
+                        String arg = args[i] + " ";
+                        meta = meta + arg;
+                    }
+                    meta = meta.trim();
+                    cmd.setValue(args[1], meta, sender);
                 }
             } else {
                 sendMessage(sender, "Too many arguments.");
